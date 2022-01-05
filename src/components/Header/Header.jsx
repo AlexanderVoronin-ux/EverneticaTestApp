@@ -5,7 +5,9 @@ import {ResetSearch} from "./ResetSearch";
 
 const HeaderEl = styled.header`
   background-color: black;
-  box-shadow: 0 0 20px 5px;
+  box-shadow: 0 0 20px 5px white;
+  z-index: 2;
+  position: relative;
 `;
 
 const Wrapper = styled.div`
