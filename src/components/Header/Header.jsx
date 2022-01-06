@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import {Container} from "./Container";
 import SearchInput from "./SearchInput";
 import {ResetSearch} from "./ResetSearch";
+import {Link, useLocation} from "react-router-dom";
 
 const HeaderEl = styled.header`
   background-color: black;
@@ -24,9 +25,7 @@ const Wrapper1 = styled.div`
 
 `;
 
-const Title = styled.a.attrs({
-    href: '/',
-})`
+const Title = styled(Link)`
   color: orange;
   text-decoration: none;
   font-size: 24px;
@@ -39,17 +38,20 @@ const Search = styled(SearchInput)`
   flex-grow: 1`;
 
 export const Header = () => {
+    const location = useLocation();
+    console.log("location", location)
     return (
         <>
             <HeaderEl>
                 <Container>
                     <Wrapper>
-                        <Title>Country Search</Title>
+                        <Title to='/'>Country Search</Title>
                     </Wrapper>
-                    <Wrapper1>
+                    { (location.pathname === '/') && <Wrapper1>
                         <Search/>
-                        <ResetSearch />
-                    </Wrapper1>
+                        <ResetSearch/>
+                        </Wrapper1>
+                    }
                 </Container>
             </HeaderEl>
         </>

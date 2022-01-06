@@ -1,17 +1,14 @@
 import styled from "styled-components";
-import {Box, CardMedia, Link, ListItemText, Paper} from "@mui/material";
+import {Box, CardMedia, ListItemText, Paper} from "@mui/material";
 
 const Wrapper = styled(Box)`
   display: grid;
   grid-template-rows: 1fr auto;
+  cursor: pointer;
 `;
 const TextWrapper = styled.div`
   text-align: center;
 `;
-
-const LinkWrapper = styled(Link)`
-    text-decoration: none !important;
-`
 
 const CardImage = styled(CardMedia)`
   display: block;
@@ -35,7 +32,7 @@ const CardText = {
 
 export const Card = ({img, name, code, onClick}) => {
     return (
-        <Box
+        <Box onClick={onClick}
             sx={{
                 display: 'flex',
                 flexWrap: 'wrap',
@@ -50,7 +47,6 @@ export const Card = ({img, name, code, onClick}) => {
         >
             <Paper elevation={4}>
                 <Wrapper >
-                    <LinkWrapper href="#">
                         <div>
                             <CardImage
                                 component="img"
@@ -63,18 +59,10 @@ export const Card = ({img, name, code, onClick}) => {
                                        secondary={code} secondaryTypographyProps={{style: CardText}}
                             />
                         </TextWrapper>
-                    </LinkWrapper>
 
                 </Wrapper>
             </Paper>
         </Box>
 
-        // <Wrapper onClick={onClick}>
-        //     <CardImage/>
-        //     <CardBody>
-        //         <CardTitle>{name}</CardTitle>
-        //         <CardText>{code}</CardText>
-        //     </CardBody>
-        // </Wrapper>
     )
 }
