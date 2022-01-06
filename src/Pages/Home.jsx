@@ -4,6 +4,13 @@ import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import Loader from "../components/Loader";
+import styled from "styled-components";
+
+const BoxLoader = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+`
 
 export const Home = () => {
 
@@ -21,7 +28,7 @@ export const Home = () => {
 
     return (
         <>
-            {!isLoading &&  <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}><Loader /></Box>}
+            {!isLoading &&  <BoxLoader><Loader /></BoxLoader>}
 
             <Box
             sx={{

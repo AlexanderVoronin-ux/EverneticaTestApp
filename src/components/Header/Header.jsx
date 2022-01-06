@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 import {Container} from "./Container";
-import SearchInput from "./SearchInput";
-import {ResetSearch} from "./ResetSearch";
 import {Link, useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {Controls} from "./Controls";
 
 const HeaderEl = styled.header`
   background-color: black;
@@ -36,8 +35,6 @@ const Title = styled(Link)`
     color: white;
   }
 `;
-const Search = styled(SearchInput)`
-  flex-grow: 1`;
 
 export const Header = () => {
 
@@ -45,6 +42,7 @@ export const Header = () => {
     const location = useLocation();
     const countryData = useSelector(s => s.countryData);
     const [searchCountries, setSearchCountries] = useState([])
+
 
     const HandleSearch = (search) => {
         let data = []
@@ -68,8 +66,9 @@ export const Header = () => {
                         <Title to='/'>Country Search</Title>
                     </Wrapper>
                     {(location.pathname === '/') && <Wrapper1>
-                        <Search onSearch={HandleSearch}/>
-                        <ResetSearch/>
+                        <Controls onSearch={HandleSearch}/>
+                        {/*<Search onSearch={HandleSearch}/>*/}
+                        {/*<ResetSearch onSearch={HandleSearch}/>*/}
                     </Wrapper1>
                     }
                 </Container>
