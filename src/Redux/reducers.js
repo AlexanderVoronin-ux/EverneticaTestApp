@@ -1,6 +1,7 @@
 const initialState = {
     countryData: null,
     isLoading: false,
+    searchCountries: []
 }
 export default function reducer(state = initialState, action) {
     switch (action.type) {
@@ -13,6 +14,10 @@ export default function reducer(state = initialState, action) {
             const errorMessage = {...error}
             return errorMessage
         }
+        case 'ADD_SEARCH_COUNTRY_DATA': {
+            return {...state, ...action.payload, isLoading: true}
+        }
+
         default:
             break;
 

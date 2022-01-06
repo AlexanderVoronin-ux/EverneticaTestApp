@@ -3,7 +3,7 @@ import {Details} from "../Pages/Details";
 import {Home} from "../Pages/Home";
 import {NotFound} from "../Pages/NotFound";
 
-export const RoutesApp = () => {
+export const RoutesApp = ({setCountries}) => {
     return (
         <Routes>
             <Route path="/" element={<Home/>}/>

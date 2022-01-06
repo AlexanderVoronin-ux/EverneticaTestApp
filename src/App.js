@@ -8,7 +8,7 @@ function App() {
         <>
             <Header/>
             <Main>
-                <RoutesApp/>
+                <RoutesApp />
             </Main>
         </>
     )

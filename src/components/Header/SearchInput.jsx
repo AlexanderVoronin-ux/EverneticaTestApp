@@ -2,7 +2,7 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import styled from 'styled-components'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 const IconSearch = styled(SearchIcon)`
@@ -46,8 +46,14 @@ const InputSearch = styled(TextField)
 const Div = styled.div`position: relative`
 
 
-export default function SearchInput() {
+export default function SearchInput({onSearch}) {
+
     const [search, setSearch] = useState('')
+
+    useEffect(() => {
+        onSearch(search)
+    }, [search])
+
     return (
         <Div>
             <InputSearch sx={{width: '40ch'}} id="search" label="Search country" onChange={e => setSearch(e.target.value)} value={search} variant="outlined"/>

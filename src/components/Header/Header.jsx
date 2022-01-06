@@ -3,6 +3,8 @@ import {Container} from "./Container";
 import SearchInput from "./SearchInput";
 import {ResetSearch} from "./ResetSearch";
 import {Link, useLocation} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 
 const HeaderEl = styled.header`
   background-color: black;
@@ -38,8 +40,26 @@ const Search = styled(SearchInput)`
   flex-grow: 1`;
 
 export const Header = () => {
+
+    const dispatch = useDispatch();
     const location = useLocation();
-    console.log("location", location)
+    const countryData = useSelector(s => s.countryData);
+    const [searchCountries, setSearchCountries] = useState([])
+
+    const HandleSearch = (search) => {
+        let data = []
+        if (search) {
+            data = countryData.filter(value => value.name.toLowerCase().includes(search.toLowerCase()))
+        }
+        setSearchCountries(data)
+    }
+
+    useEffect(() => {
+        if (searchCountries && countryData) {
+            dispatch({type: 'ADD_SEARCH_COUNTRY_DATA', payload: {searchCountries}})
+        }
+    }, [countryData, searchCountries])
+
     return (
         <>
             <HeaderEl>
@@ -47,10 +67,10 @@ export const Header = () => {
                     <Wrapper>
                         <Title to='/'>Country Search</Title>
                     </Wrapper>
-                    { (location.pathname === '/') && <Wrapper1>
-                        <Search/>
+                    {(location.pathname === '/') && <Wrapper1>
+                        <Search onSearch={HandleSearch}/>
                         <ResetSearch/>
-                        </Wrapper1>
+                    </Wrapper1>
                     }
                 </Container>
             </HeaderEl>
