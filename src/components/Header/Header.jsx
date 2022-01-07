@@ -56,7 +56,7 @@ export const Header = () => {
         if (searchCountries && countryData) {
             dispatch({type: 'ADD_SEARCH_COUNTRY_DATA', payload: {searchCountries}})
         }
-    }, [countryData, searchCountries])
+    }, [countryData, searchCountries, dispatch])
 
     return (
         <>
@@ -67,8 +67,6 @@ export const Header = () => {
                     </Wrapper>
                     {(location.pathname === '/') && <Wrapper1>
                         <Controls onSearch={HandleSearch}/>
-                        {/*<Search onSearch={HandleSearch}/>*/}
-                        {/*<ResetSearch onSearch={HandleSearch}/>*/}
                     </Wrapper1>
                     }
                 </Container>

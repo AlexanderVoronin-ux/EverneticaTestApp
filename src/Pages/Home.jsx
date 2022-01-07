@@ -44,6 +44,7 @@ export const Home = () => {
                         img: item.flags.svg,
                         name: item.name,
                         code: item.numericCode,
+                        capital: item.capital,
                     }
                     return (
                         <Card key={item.name} {...countryInfo} onClick={() => navigate(`/details/${item.name}`)}/>
@@ -55,6 +56,8 @@ export const Home = () => {
                         img: item.flags.svg,
                         name: item.name,
                         code: item.numericCode,
+                        capital: item.capital,
+
                     }
                     return (
                         <Card key={item.name} {...countryInfo} onClick={() => navigate(`/details/${item.name}`)}/>
