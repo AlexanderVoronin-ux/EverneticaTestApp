@@ -26,11 +26,7 @@ export const Details = () => {
     const countryNameData = useSelector(s => s.countryDataName)
     const {name} = useParams()
     const navigate = useNavigate();
-    const HandleNavigate = () => {
-        navigate('/')
-    }
     const dispatch = useDispatch()
-    console.log('countryNameData', countryNameData)
 
     useEffect(() => {
         dispatch({type: 'REQUEST_COUNTRY_DATA_NAME', payload: {name}})
@@ -40,7 +36,7 @@ export const Details = () => {
     return (
         <>
             <Wrapper>
-                <ButtonNavigate onClick={HandleNavigate} aria-label="go back">
+                <ButtonNavigate onClick={() => navigate(-1)} aria-label="go back">
                     <IconNavigate/>Back
                 </ButtonNavigate>
                 {countryNameData && <DetailInfo {...countryNameData}/>}
