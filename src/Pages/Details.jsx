@@ -23,10 +23,10 @@ const IconNavigate = styled(WestIcon)`
 
 export const Details = () => {
 
-    const countryNameData = useSelector(s => s.countryDataName)
-    const {name} = useParams()
+    const countryNameData = useSelector(s => s.countryDataName);
+    const {name} = useParams();
     const navigate = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch({type: 'REQUEST_COUNTRY_DATA_NAME', payload: {name}})

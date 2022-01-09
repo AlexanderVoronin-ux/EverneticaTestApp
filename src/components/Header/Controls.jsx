@@ -4,6 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import styled from 'styled-components'
 import {Button} from "@mui/material";
 import {useEffect, useState} from "react";
+import {useDispatch} from "react-redux";
 
 
 const IconSearch = styled(SearchIcon)`
@@ -62,15 +63,16 @@ const ResetButton = styled(Button)`
 
 export const Controls = ({onSearch}) => {
 
-    const [search, setSearch] = useState('')
+    const [search, setSearch] = useState('');
+    const dispatch = useDispatch();
 
     useEffect(() => {
         onSearch(search)
     }, [search])
 
-    const HandlerReset = () => {
-        let search = '';
-        onSearch(search)
+    const ResetSearch = () => {
+        setSearch('')
+        dispatch({type:'RESET_SEARCH_COUNTRY_DATA'})
     }
 
     return (
@@ -82,7 +84,7 @@ export const Controls = ({onSearch}) => {
             </Div>
 
             <Wrapper>
-                <ResetButton onClick={() => setSearch('')} variant="outlined">Reset Search</ResetButton>
+                <ResetButton onClick={ResetSearch} variant="outlined">Reset Search</ResetButton>
             </Wrapper>
 
         </>
