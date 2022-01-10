@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {Card, Divider, Paper} from "@mui/material";
+import {Badge, Box, Card, Divider, Paper} from "@mui/material";
 
 const Wrapper = styled.div`
   margin-top: 3rem;
@@ -24,7 +24,7 @@ const InfoTitle = styled.h1`
 const ListGroup = styled.div``
 
 const List = styled.ul`
-margin-right: 2rem;
+  margin-right: 2rem;
 `
 
 const ListItem = styled.li`
@@ -33,16 +33,19 @@ const ListItem = styled.li`
   margin-bottom: 1rem;
 `
 
-
 export const DetailInfo = (props) => {
-    const {name, flags, capital, population, region, nativeName} = props
+    const {name, flags, capital, population, region, nativeName, isSelected} = props
+
+
     return (
         <Wrapper>
             <Paper elevation={12}>
                 <InfoImage src={flags.svg} alt={name}/>
             </Paper>
-            <Card sx={{minWidth: 300, backgroundColor: "black"}}>
-                <InfoTitle>{name}</InfoTitle>
+            <Card sx={{minWidth: 300, backgroundColor: "black", position: "relative"}}>
+                {isSelected && <Badge badgeContent="Selected" color="secondary"
+                        style={{position: "absolute", top: "8%", left: "13%"}}/>
+                }                <InfoTitle>{name}</InfoTitle>
                 <Divider sx={{borderColor: "white"}} variant="middle"/>
                 <ListGroup>
                     <List>

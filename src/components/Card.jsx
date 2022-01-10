@@ -43,8 +43,9 @@ export const Card = ({item ,img, name, code, capital, onClick, index, moveCard})
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const addCountryDataItem = useSelector(s => s.addCountryDataItem);
-    const [showInput, setShowInput] = useState(false)
-    const [inputCheck, setInputCheck] = useState(false)
+    const [showInput, setShowInput] = useState(false);
+    const [inputCheck, setInputCheck] = useState(false);
+    const isSelected = true;
 
     const handleMouseOver = e => {
        setShowInput(true)
@@ -56,7 +57,7 @@ export const Card = ({item ,img, name, code, capital, onClick, index, moveCard})
     const HandleChange = () => {
         inputCheck ? setInputCheck(false) : setInputCheck(true)
         if (!addCountryDataItem.includes(item))
-        dispatch({type:"ADD_SEARCH_COUNTRY_ITEM", payload: item})
+        dispatch({type:"ADD_SEARCH_COUNTRY_ITEM", payload: {...item, isSelected}})
     }
 
     const ref = useRef(null);
