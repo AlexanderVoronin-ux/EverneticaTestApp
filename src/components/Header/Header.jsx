@@ -1,11 +1,15 @@
 import styled from 'styled-components'
 import {Container} from "./Container";
-import SearchInput from "./SearchInput";
-import {ResetSearch} from "./ResetSearch";
+import {Link, useLocation} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Controls} from "./Controls";
 
 const HeaderEl = styled.header`
   background-color: black;
-  box-shadow: 0 0 20px 5px;
+  box-shadow: 0 0 20px 5px white;
+  z-index: 2;
+  position: relative;
 `;
 
 const Wrapper = styled.div`
@@ -22,9 +26,7 @@ const Wrapper1 = styled.div`
 
 `;
 
-const Title = styled.a.attrs({
-    href: '/',
-})`
+const Title = styled(Link)`
   color: orange;
   text-decoration: none;
   font-size: 24px;
@@ -33,21 +35,40 @@ const Title = styled.a.attrs({
     color: white;
   }
 `;
-const Search = styled(SearchInput)`
-  flex-grow: 1`;
 
 export const Header = () => {
+
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const countryData = useSelector(s => s.countryData);
+    const [searchCountries, setSearchCountries] = useState([])
+
+
+    const HandleSearch = (search) => {
+        let data = []
+        if (search) {
+            data = countryData.filter(value => value.name.toLowerCase().includes(search.toLowerCase()))
+        }
+        setSearchCountries(data)
+    }
+
+    useEffect(() => {
+        if (searchCountries && countryData) {
+            dispatch({type: 'ADD_SEARCH_COUNTRY_DATA', payload: {searchCountries}})
+        }
+    }, [countryData, searchCountries, dispatch])
+
     return (
         <>
             <HeaderEl>
                 <Container>
                     <Wrapper>
-                        <Title>Country Search</Title>
+                        <Title to='/'>Country Search</Title>
                     </Wrapper>
-                    <Wrapper1>
-                        <Search/>
-                        <ResetSearch />
+                    {(location.pathname === '/') && <Wrapper1>
+                        <Controls onSearch={HandleSearch}/>
                     </Wrapper1>
+                    }
                 </Container>
             </HeaderEl>
         </>
